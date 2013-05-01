@@ -2,19 +2,22 @@
 import cocos
 import pyglet
 
-from data import SCREEN_SIZE, TITLE, TITLE_FONT, TITLE_COLOR
+from data import SCREEN_SIZE, TITLE, TITLE_FONT, TITLE_COLOR, MOUSE_CURSOR, BG_COLOR, TRANSITION
 from menu import Menu
+from game import GameScene
 
 
-def start_game(self):
-    pass
+def start_game():
+    gs = GameScene()
+    gs = TRANSITION(gs,duration=2)
+    cocos.director.director.push(gs)
 
 def quit():
     cocos.director.director.terminate_app = True
 
 def callback(dt):
     #backgroung
-    pyglet.gl.glClearColor(0.85, 0.85, 0.85, 1)
+    pyglet.gl.glClearColor(*BG_COLOR)
 
 def main():
     # initialization
@@ -29,6 +32,7 @@ def main():
                     ]
 
     cocos.director.director.init(width=SCREEN_SIZE[0], height=SCREEN_SIZE[1], caption=TITLE, do_not_scale=True)
+    cocos.director.director.window.set_mouse_cursor(MOUSE_CURSOR)
 
     #start scene
     start_scene = cocos.scene.Scene()
