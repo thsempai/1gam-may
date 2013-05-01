@@ -1,6 +1,6 @@
 import cocos
 
-from data import MENU_FONT
+from data import MENU_FONT, MENU_ITEM_COLOR, MENU_ITEM_SELECTED_COLOR
 
 
 class Menu(cocos.menu.Menu):
@@ -9,15 +9,17 @@ class Menu(cocos.menu.Menu):
 
         cocos.menu.Menu.__init__(self)
 
+        #menu construction
+
         self.font_item['font_name'] = MENU_FONT 
-        self.font_item['color'] = (89,89,89,255)     
-        self.font_item['font_size'] = 50
+        self.font_item['color'] = MENU_ITEM_COLOR     
+        self.font_item['font_size'] = 45
         self.font_item_selected['font_name'] = MENU_FONT
-        self.font_item_selected['color'] = (141,199,63,255) 
-        self.font_item_selected['font_size'] = 50  
+        self.font_item_selected['color'] = MENU_ITEM_SELECTED_COLOR
+        self.font_item_selected['font_size'] = 50 
         self.menu_valign = cocos.menu.BOTTOM
         self.menu_halign = cocos.menu.CENTER
-        self.y += 100
+        self.y = 100
 
         l = []
 
