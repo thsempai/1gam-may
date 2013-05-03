@@ -15,7 +15,7 @@ MOUSE_CURSOR = pyglet.window.ImageMouseCursor(cursor,cursor.width/2,cursor.heigh
 
 SCREEN_SIZE = 800,600
 
-NORMAL_COLOR = 217, 217, 217, 255 
+NORMAL_COLOR = 217, 217, 217, 120 
 OLD_COLOR = 112, 66, 20, 120
 
 #gl color

@@ -4,13 +4,14 @@ import pyglet
 
 from data import SCREEN_SIZE, TITLE, TITLE_FONT, TITLE_COLOR, MOUSE_CURSOR, BG_COLOR, TRANSITION
 from menu import Menu
-from game import GameScene
+from game import MultiScene
 
 
 def start_game():
-    gs = GameScene()
-    gs = TRANSITION(gs,duration=2)
-    cocos.director.director.push(gs)
+    ms = MultiScene('test_layer_position')
+    ms = TRANSITION(ms.get_active_scene(),duration=2)
+    cocos.director.director.push(ms)
+
 
 def quit():
     cocos.director.director.terminate_app = True
