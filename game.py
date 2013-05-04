@@ -3,7 +3,7 @@
 import cocos
 import pyglet
 
-from data import OLD_COLOR, NORMAL_COLOR, TRANSITION, SCREEN_SIZE
+from data import OLD_COLOR, NORMAL_COLOR, TRANSITION, SCREEN_SIZE, SIDE_SCREEN, SLIDE_SPEED
 
 class MultiScene(object):
 
@@ -43,8 +43,15 @@ class MultiScene(object):
         self.get_active_scene().layer.set_view(*pos)
 
     def on_mouse_motion(self,x,y,dx,dy):
-        self.position = x - SCREEN_SIZE[0]/2, y - SCREEN_SIZE[1]/2
+
+        if x <= SIDE_SCREEN:
+            self.slide(-1)
+        elif x >= SCREEN_SIZE[0] - SIDE_SCREEN:
+            self.slide(1)
         self.refresh_view()
+
+    def slide(self,sens):
+         self.position = self.position[0] + SLIDE_SPEED * sens, self.position[1]
 
 
 class GameScene(cocos.scene.Scene):
