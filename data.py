@@ -32,5 +32,8 @@ MENU_ITEM_SELECTED_COLOR = (10,10,10,255)
 TRANSITION = cocos.scenes.transitions.FadeTransition
 
 #slide
-SIDE_SCREEN = 50
-SLIDE_SPEED = 2
+SIDE_SCREEN = 100
+SLIDE_SPEED = 16
+
+#test
+TEST_MODE = True
