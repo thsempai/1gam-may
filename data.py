@@ -13,6 +13,7 @@ MOUSE_CURSOR = pyglet.window.ImageMouseCursor(cursor,cursor.width/2,cursor.heigh
 
 #screen
 
+#SCREEN_SIZE = 1024,780
 SCREEN_SIZE = 800,600
 
 NORMAL_COLOR = 217, 217, 217, 120 
@@ -35,5 +36,9 @@ TRANSITION = cocos.scenes.transitions.FadeTransition
 SIDE_SCREEN = 100
 SLIDE_SPEED = 16
 
+#inventory
+TOP_SIDE = 100
+
 #test
 TEST_MODE = True
+APPEARANCE_TIME = 3.
