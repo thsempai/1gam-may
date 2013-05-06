@@ -3,7 +3,7 @@
 import cocos
 import pyglet
 
-from data import OLD_COLOR, NORMAL_COLOR, TRANSITION, SCREEN_SIZE
+from data import OLD_COLOR, NORMAL_COLOR, TRANSITION, SCREEN_SIZE, SIDE_SCREEN, SLIDE_SPEED, TEST_MODE
 
 class MultiScene(object):
 
@@ -19,8 +19,17 @@ class MultiScene(object):
         
         self.active = 'present'
         self.position = 0,0
+        self.slide_scene = 0.
+
+        #add scheduler
+        for scene in self.scene.values():
+            scene.schedule(self.callback)
 
         cocos.director.director.window.push_handlers(self)
+
+    def callback(self,dt):
+        if self.slide_scene:
+            self.slide()
 
     def get_active_scene(self):
         return self.scene[self.active]
@@ -43,9 +52,20 @@ class MultiScene(object):
         self.get_active_scene().layer.set_view(*pos)
 
     def on_mouse_motion(self,x,y,dx,dy):
-        self.position = x - SCREEN_SIZE[0]/2, y - SCREEN_SIZE[1]/2
-        self.refresh_view()
 
+        SLIDE_SPEED
+        steps = range(SLIDE_SPEED,0,-1)
+
+        if x <= SIDE_SCREEN:
+            self.slide_scene = -1 * steps[int(x/float(SIDE_SCREEN) * (SLIDE_SPEED-1))]
+        elif x >= SCREEN_SIZE[0] - SIDE_SCREEN:
+            self.slide_scene = 1 * steps[int((SCREEN_SIZE[0] - x)/float(SIDE_SCREEN) * (SLIDE_SPEED-1))]
+        else:
+            self.slide_scene = 0.
+
+    def slide(self):
+        self.position = self.position[0] + self.slide_scene, self.position[1]
+        self.refresh_view()
 
 class GameScene(cocos.scene.Scene):
 
@@ -63,5 +83,20 @@ class GameScene(cocos.scene.Scene):
         self.sprite = cocos.sprite.Sprite(background,anchor=(0,0))
         self.layer.add(self.sprite)
 
+        #lines for test
+        start = SIDE_SCREEN,0
+        end = start[0], SCREEN_SIZE[1]
+        color = 0,0,0,255
+        line1 = cocos.draw.Line(start,end,color)
+
+        start = SCREEN_SIZE[0] - SIDE_SCREEN, 0
+        end = start[0], SCREEN_SIZE[1]
+        color = 0,0,0,255
+        line2 = cocos.draw.Line(start,end,color)
+
+        self.add(line1,z=10)
+        self.add(line2,z=10)
+
+        #add
         self.add(self.layer,z=0)
         self.add(self.filter_layer,z=1)
