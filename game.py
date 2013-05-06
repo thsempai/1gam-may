@@ -84,19 +84,37 @@ class GameScene(cocos.scene.Scene):
         self.layer.add(self.sprite)
 
         #lines for test
-        start = SIDE_SCREEN,0
-        end = start[0], SCREEN_SIZE[1]
         color = 0,0,0,255
-        line1 = cocos.draw.Line(start,end,color)
+        lines = [
+                    [
+                    (SIDE_SCREEN,0),
+                    (SIDE_SCREEN,SCREEN_SIZE[1])
+                    ],
+                    [
+                    (SCREEN_SIZE[0] - SIDE_SCREEN,0),
+                    (SCREEN_SIZE[0] - SIDE_SCREEN,SCREEN_SIZE[1])
+                    ],
+                    [
+                    (0, TOP_SIDE[1]),
+                    (SCREEN_SIZE[0], TOP_SIDE[1])
+                    ]
+                ]
+        for line in lines:
+            line = cocos.draw.Line(line[0],line[1],color)
 
-        start = SCREEN_SIZE[0] - SIDE_SCREEN, 0
-        end = start[0], SCREEN_SIZE[1]
-        color = 0,0,0,255
-        line2 = cocos.draw.Line(start,end,color)
-
-        self.add(line1,z=10)
-        self.add(line2,z=10)
+        self.add(linev1,z=10)
+        self.add(linev2,z=10)
 
         #add
         self.add(self.layer,z=0)
         self.add(self.filter_layer,z=1)
+
+class Inventory(cocos.layer.Layer):
+
+    def __init__(self):
+        cocos.layer.Layer.__init__(self)
+
+    def appears(self,visible = True):
+        pass
+
+
