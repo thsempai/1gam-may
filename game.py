@@ -149,7 +149,7 @@ class Inventory(cocos.sprite.Sprite):
         self.appearance_time = APPEARANCE_TIME
 
     def appears(self,appears=True):
-        if len(self.actions) > 0:
+        if self.actions:
             return
         
         sens = 1
